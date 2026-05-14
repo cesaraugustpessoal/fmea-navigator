@@ -41,49 +41,56 @@
 :root {
   --radius: 0.75rem;
 
-  /* Industrial dark theme */
-  --background: oklch(0.18 0.02 250);
-  --foreground: oklch(0.96 0.01 250);
+  /* Industrial light theme — projector friendly */
+  --background: oklch(0.985 0.003 250); /* off-white slate-50 */
+  --foreground: oklch(0.18 0.03 250); /* slate-900 */
 
-  --surface: oklch(0.22 0.025 250);
-  --surface-elevated: oklch(0.26 0.03 250);
+  --surface: oklch(0.97 0.005 250);
+  --surface-elevated: oklch(1 0 0);
 
-  --card: oklch(0.24 0.028 250 / 0.6);
-  --card-foreground: oklch(0.96 0.01 250);
+  --card: oklch(1 0 0 / 0.85);
+  --card-foreground: oklch(0.18 0.03 250);
 
-  --popover: oklch(0.22 0.025 250);
-  --popover-foreground: oklch(0.96 0.01 250);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.18 0.03 250);
 
-  --primary: oklch(0.72 0.18 50); /* industrial orange */
-  --primary-foreground: oklch(0.15 0.02 250);
+  --primary: oklch(0.62 0.2 38); /* industrial orange */
+  --primary-foreground: oklch(0.99 0 0);
 
-  --secondary: oklch(0.3 0.04 250);
-  --secondary-foreground: oklch(0.96 0.01 250);
+  --secondary: oklch(0.94 0.01 250);
+  --secondary-foreground: oklch(0.2 0.03 250);
 
-  --muted: oklch(0.28 0.025 250);
-  --muted-foreground: oklch(0.7 0.02 250);
+  --muted: oklch(0.95 0.008 250);
+  --muted-foreground: oklch(0.45 0.02 250);
 
-  --accent: oklch(0.6 0.15 230); /* steel blue */
-  --accent-foreground: oklch(0.98 0 0);
+  --accent: oklch(0.5 0.16 245); /* steel blue */
+  --accent-foreground: oklch(0.99 0 0);
 
-  --destructive: oklch(0.62 0.24 25);
-  --destructive-foreground: oklch(0.98 0 0);
+  --destructive: oklch(0.55 0.24 25);
+  --destructive-foreground: oklch(0.99 0 0);
 
-  --warning: oklch(0.83 0.17 90); /* yellow */
-  --success: oklch(0.72 0.18 145); /* green */
-  --alert: oklch(0.7 0.21 40); /* alert orange */
+  --warning: oklch(0.72 0.17 80);
+  --success: oklch(0.6 0.17 150);
+  --alert: oklch(0.62 0.21 45);
 
-  --border: oklch(0.96 0.01 250 / 0.1);
-  --input: oklch(0.96 0.01 250 / 0.15);
-  --ring: oklch(0.72 0.18 50);
+  --border: oklch(0.18 0.03 250 / 0.1);
+  --input: oklch(0.18 0.03 250 / 0.15);
+  --ring: oklch(0.62 0.2 38);
 
-  --gradient-hero: radial-gradient(ellipse at top, oklch(0.3 0.08 250 / 0.6), transparent 70%),
-    linear-gradient(180deg, oklch(0.18 0.02 250), oklch(0.15 0.025 250));
-  --gradient-primary: linear-gradient(135deg, oklch(0.72 0.18 50), oklch(0.65 0.2 35));
-  --gradient-card: linear-gradient(135deg, oklch(0.96 0.01 250 / 0.06), oklch(0.96 0.01 250 / 0.02));
+  --gradient-hero: radial-gradient(ellipse at top, oklch(0.62 0.2 38 / 0.12), transparent 60%),
+    linear-gradient(180deg, oklch(0.985 0.003 250), oklch(0.95 0.008 250));
+  --gradient-primary: linear-gradient(135deg, oklch(0.65 0.21 42), oklch(0.58 0.22 30));
+  --gradient-card: linear-gradient(
+    135deg,
+    oklch(1 0 0 / 0.9),
+    oklch(1 0 0 / 0.65)
+  );
 
-  --shadow-glow: 0 0 60px oklch(0.72 0.18 50 / 0.25);
-  --shadow-elevated: 0 20px 60px -20px oklch(0.1 0.02 250 / 0.6);
+  --shadow-glow: 0 10px 40px -10px oklch(0.62 0.2 38 / 0.45);
+  --shadow-soft: 0 4px 16px -4px oklch(0.18 0.03 250 / 0.08),
+    0 2px 6px -2px oklch(0.18 0.03 250 / 0.06);
+  --shadow-elevated: 0 24px 60px -20px oklch(0.18 0.03 250 / 0.18),
+    0 8px 24px -8px oklch(0.18 0.03 250 / 0.1);
 }
 
 @layer base {
@@ -101,8 +108,8 @@
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     background-image:
-      radial-gradient(circle at 20% 0%, oklch(0.6 0.15 230 / 0.08), transparent 50%),
-      radial-gradient(circle at 80% 50%, oklch(0.72 0.18 50 / 0.06), transparent 50%);
+      radial-gradient(circle at 20% 0%, oklch(0.5 0.16 245 / 0.08), transparent 50%),
+      radial-gradient(circle at 80% 50%, oklch(0.62 0.2 38 / 0.07), transparent 50%);
     background-attachment: fixed;
   }
 }
@@ -113,14 +120,16 @@
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-soft);
   }
 
   .glass-hover {
-    transition: all 0.3s ease;
+    transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+      box-shadow 0.35s ease, border-color 0.35s ease;
   }
   .glass-hover:hover {
-    border-color: oklch(0.72 0.18 50 / 0.4);
-    transform: translateY(-4px);
+    border-color: oklch(0.62 0.2 38 / 0.4);
+    transform: translateY(-8px);
     box-shadow: var(--shadow-elevated);
   }
 
@@ -133,13 +142,21 @@
 
   .grid-pattern {
     background-image:
-      linear-gradient(oklch(0.96 0.01 250 / 0.04) 1px, transparent 1px),
-      linear-gradient(90deg, oklch(0.96 0.01 250 / 0.04) 1px, transparent 1px);
+      linear-gradient(oklch(0.18 0.03 250 / 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, oklch(0.18 0.03 250 / 0.06) 1px, transparent 1px);
     background-size: 48px 48px;
   }
 
   .glow {
     box-shadow: var(--shadow-glow);
+  }
+
+  /* Icon hover */
+  .icon-hover {
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .group:hover .icon-hover {
+    transform: scale(1.15) rotate(-6deg);
   }
 
   @keyframes fade-up {
@@ -150,15 +167,19 @@
     from { opacity: 0; }
     to { opacity: 1; }
   }
+  @keyframes slide-up {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
   @keyframes pulse-glow {
-    0%, 100% { box-shadow: 0 0 20px oklch(0.72 0.18 50 / 0.3); }
-    50% { box-shadow: 0 0 40px oklch(0.72 0.18 50 / 0.6); }
+    0%, 100% { box-shadow: 0 0 20px oklch(0.62 0.2 38 / 0.35); }
+    50% { box-shadow: 0 0 40px oklch(0.62 0.2 38 / 0.6); }
   }
 
   .reveal {
     opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+    transform: translateY(28px);
+    transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
   }
   .reveal.visible {
     opacity: 1;
@@ -167,5 +188,6 @@
 
   .animate-fade-up { animation: fade-up 0.7s ease-out both; }
   .animate-fade-in { animation: fade-in 1s ease-out both; }
+  .animate-slide-up { animation: slide-up 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
   .animate-pulse-glow { animation: pulse-glow 2.5s ease-in-out infinite; }
 }
